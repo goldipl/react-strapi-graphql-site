@@ -1,83 +1,96 @@
-Based on the project name and the schema information you provided, here is a professional `README.md` file tailored for your **React + Strapi 5 + GraphQL** project.
+# React Strapi 5 GraphQL Reviews
 
-It includes setup instructions, API configuration, and the specific GraphQL structure for your `review` collection.
+A modern, type-safe review site built with **React** and **TypeScript**. This project fetches content from **Strapi 5** using **GraphQL** for optimized data delivery.
 
----
+## 📂 Project Structure
 
-# React Strapi GraphQL Site
+```text
+src/
+├── graphql/
+│   └── queries.ts       # Centralized GraphQL query definitions
+├── types/
+│   └── review.ts        # TypeScript interfaces for Review data
+├── pages/
+│   ├── Homepage.tsx      # Review listing with content snippets
+│   └── ReviewDetails.tsx # Full review view by documentId
+├── hooks/
+│   └── useFetch.ts       # Utility for standard REST fetching
+└── index.tsx            # Apollo Client and Provider configuration
 
-A modern full-stack web application built with **React** on the frontend and **Strapi 5** as the headless CMS, using **GraphQL** for efficient data fetching.
+```
 
 ## 🚀 Features
 
-- **Strapi 5 Backend:** Leverages the latest Strapi features like `documentId`.
-- **GraphQL API:** Optimized queries using Apollo Client or similar tools.
-- **Dynamic Reviews:** Manage and display game or product reviews dynamically.
-- **Blocks Content:** Support for Strapi 5's new "Blocks" (Rich Text) field type.
+- **Strapi 5 Document Service:** Uses `documentId` for stable, SEO-friendly routing.
+- **Apollo Client Integration:** Efficient data fetching with built-in caching.
+- **Type-Safe Schema:** Full TypeScript support for Strapi's "Blocks" (JSON) content.
+- **GraphQL API:** Requests only the fields required, reducing payload size.
 
 ---
 
 ## 🛠️ Tech Stack
 
-- **Frontend:** [React.js](https://reactjs.org/)
+- **Frontend:** React, TypeScript, React Router 6
+- **API Client:** Apollo Client (GraphQL)
 - **Backend:** [Strapi 5](https://strapi.io/)
-- **API:** [GraphQL](https://graphql.org/)
-- **Database:** SQLite (default) / PostgreSQL
+- **Content:** Strapi Blocks (Rich Text)
 
 ---
 
 ## 📦 Getting Started
 
-### 1. Prerequisites
+### 1. Backend Setup (Strapi)
 
-- **Node.js:** v18 or v20+
-- **NPM** or **Yarn**
-
-### 2. Backend Setup (Strapi)
-
-Navigate to your strapi directory:
+1. Ensure you have the GraphQL plugin installed in your Strapi directory:
 
 ```bash
-cd backend
-npm install
+npm install @strapi/plugin-graphql
+
+```
+
+2. Run the develop server:
+
+```bash
 npm run develop
 
 ```
 
-- **Permissions:** Go to `Settings > Users & Permissions Plugin > Roles > Public`.
-- **Enable Review API:** Find the **Review** collection and enable `find` and `findOne`.
-- **GraphQL Plugin:** Ensure the GraphQL plugin is installed (`npm install @strapi/plugin-graphql`).
+3. **Permissions:** In the Strapi Admin, go to `Settings > Roles > Public`. Enable **find** and **findOne** for the **Review** collection.
 
-### 3. Frontend Setup (React)
+### 2. Frontend Setup (React)
 
-Navigate to your react directory:
+1. Install dependencies:
 
 ```bash
-cd frontend
 npm install
+
+```
+
+2. Start the development server:
+
+```bash
 npm start
 
 ```
 
 ---
 
-## 📑 Schema: Review
+## 📑 GraphQL Schema Summary
 
-The project uses a `review` collection type with the following attributes:
+The project interacts with the following `Review` schema:
 
-| Field    | Type    | Description                          |
-| -------- | ------- | ------------------------------------ |
-| `title`  | String  | Unique title of the review.          |
-| `rating` | Integer | Rating from 1 to 10.                 |
-| `body`   | Blocks  | Rich text content (Strapi 5 Blocks). |
+| Field        | Type    | Description                             |
+| ------------ | ------- | --------------------------------------- |
+| `documentId` | ID!     | The unique identifier for the document. |
+| `title`      | String! | Review title.                           |
+| `rating`     | Int!    | Numeric score.                          |
+| `body`       | JSON!   | Strapi Blocks rich text data.           |
 
 ---
 
-## 📡 GraphQL Examples
+## 📡 Example Query
 
-### Fetch All Reviews
-
-In Strapi 5, the GraphQL structure is flattened. Use this query to fetch your data:
+Data is fetched using the following query structure in `src/graphql/queries.ts`:
 
 ```graphql
 query GetReviews {
@@ -90,42 +103,20 @@ query GetReviews {
 }
 ```
 
-### Fetch a Single Review by Document ID
-
-```graphql
-query GetReview($docId: ID!) {
-  review(documentId: $docId) {
-    title
-    rating
-    body
-  }
-}
-```
-
 ---
 
-## 🔧 Environment Variables
+## 🔧 Scripts
 
-Create a `.env` file in your React root directory:
-
-```env
-REACT_APP_BACKEND_URL=http://localhost:1337
-REACT_APP_GRAPHQL_ENDPOINT=http://localhost:1337/graphql
-
-```
-
-## 🤝 Contributing
-
-1. Fork the Project
-2. Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the Branch (`git push origin feature/AmazingFeature`)
-5. Open a Pull Request
+- `npm start`: Runs the app in development mode.
+- `npm run build`: Optimizes the app for production.
+- `npm test`: Launches the test runner.
 
 ## 📄 License
 
-Distributed under the MIT License. See `LICENSE` for more information.
+Distributed under the MIT License.
 
 ---
 
 **Project Link:** [https://github.com/goldipl/react-strapi-graphql-site](https://github.com/goldipl/react-strapi-graphql-site)
+
+Would you like me to add a **Troubleshooting** section to the README to cover the common fixes we found for Apollo Client imports and TypeScript config?
