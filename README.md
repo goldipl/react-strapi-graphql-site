@@ -114,7 +114,3 @@ query GetReviews {
 ## 📄 License
 
 Distributed under the MIT License.
-
----
-
-**Project Link:** [https://github.com/goldipl/react-strapi-graphql-site](https://github.com/goldipl/react-strapi-graphql-site)
