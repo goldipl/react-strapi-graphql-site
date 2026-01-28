@@ -1,18 +1,19 @@
 import { useParams, useNavigate } from "react-router-dom";
 import useFetch from "../hooks/useFetch";
+import { Review } from "../types/review";
 
 const ReviewDetails = () => {
-  const { id } = useParams();
+  const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
 
-  const { loading, error, data } = useFetch(
-    `http://localhost:1337/api/reviews/${id}`,
-  );
+  const {
+    loading,
+    error,
+    data: review,
+  } = useFetch<Review>(`http://localhost:1337/api/reviews/${id}`);
 
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error loading review!</p>;
-
-  const review = data;
 
   return (
     <div className="review-details">
@@ -25,7 +26,6 @@ const ReviewDetails = () => {
         ))}
       </div>
 
-      {/* --- Back Button --- */}
       <button className="back-btn" onClick={() => navigate(-1)}>
         &larr; Go Back
       </button>

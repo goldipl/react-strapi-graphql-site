@@ -1,36 +1,33 @@
 import { useEffect, useState } from "react";
 
-export interface Review {
-  id: number;
-  documentId: string;
-  title: string;
-  rating: number;
-  body: any[];
-  createdAt: string;
-  updatedAt: string;
-  publishedAt: string;
-}
-
-const useFetch = (url: string) => {
-  const [data, setData] = useState<any>(null);
+const useFetch = <T>(url: string) => {
+  const [data, setData] = useState<T | null>(null);
   const [error, setError] = useState<Error | null>(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    const abortController = new AbortController();
+
     const fetchData = async () => {
       setLoading(true);
       try {
-        const res = await fetch(url);
+        const res = await fetch(url, { signal: abortController.signal });
+        if (!res.ok) throw new Error("Could not fetch data");
+
         const json = await res.json();
         setData(json.data);
-        setLoading(false);
       } catch (err: any) {
-        setError(err);
+        if (err.name !== "AbortError") {
+          setError(err);
+        }
+      } finally {
         setLoading(false);
       }
     };
 
     fetchData();
+
+    return () => abortController.abort();
   }, [url]);
 
   return { loading, error, data };

@@ -1,10 +1,13 @@
 import { Link } from "react-router-dom";
-import useFetch, { Review } from "../hooks/useFetch";
+import useFetch from "../hooks/useFetch";
+import { Review } from "../types/review";
 
 const Homepage = () => {
-  const { loading, error, data } = useFetch(
-    "http://localhost:1337/api/reviews",
-  );
+  const {
+    loading,
+    error,
+    data: reviews,
+  } = useFetch<Review[]>("http://localhost:1337/api/reviews");
 
   if (loading) return <p>Loading latest reviews...</p>;
   if (error) return <p>Error fetching reviews.</p>;
@@ -13,8 +16,8 @@ const Homepage = () => {
     <div className="homepage">
       <h1>Latest Reviews</h1>
 
-      {data &&
-        data.map((review: Review) => {
+      {reviews &&
+        reviews.map((review) => {
           const previewText = review.body?.[0]?.children?.[0]?.text || "";
 
           return (
