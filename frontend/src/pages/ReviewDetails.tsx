@@ -3,7 +3,6 @@ import { gql } from "@apollo/client";
 import { useQuery } from "@apollo/client/react";
 import { Review } from "../types/review";
 
-// 1. Define the Query with a variable ($id)
 const GET_REVIEW_DETAILS = gql`
   query GetReviewDetails($id: ID!) {
     review(documentId: $id) {
@@ -19,7 +18,6 @@ const ReviewDetails = () => {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
 
-  // 2. Use useQuery and pass the 'id' via the variables option
   const { loading, error, data } = useQuery<{ review: Review }>(
     GET_REVIEW_DETAILS,
     {
@@ -44,7 +42,6 @@ const ReviewDetails = () => {
         ))}
       </div>
 
-      {/* --- Back Button --- */}
       <button className="back-btn" onClick={() => navigate(-1)}>
         &larr; Go Back
       </button>
