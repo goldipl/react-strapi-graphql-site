@@ -118,5 +118,3 @@ Distributed under the MIT License.
 ---
 
 **Project Link:** [https://github.com/goldipl/react-strapi-graphql-site](https://github.com/goldipl/react-strapi-graphql-site)
-
-Would you like me to add a **Troubleshooting** section to the README to cover the common fixes we found for Apollo Client imports and TypeScript config?
