@@ -1,70 +1,122 @@
-# Getting Started with Create React App
+# React Strapi 5 GraphQL Reviews
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A modern, type-safe review site built with **React** and **TypeScript**. This project fetches content from **Strapi 5** using **GraphQL** for optimized data delivery.
 
-## Available Scripts
+## 📂 Project Structure
 
-In the project directory, you can run:
+```text
+src/
+├── graphql/
+│   └── queries.ts       # Centralized GraphQL query definitions
+├── types/
+│   └── review.ts        # TypeScript interfaces for Review data
+├── pages/
+│   ├── Homepage.tsx      # Review listing with content snippets
+│   └── ReviewDetails.tsx # Full review view by documentId
+├── hooks/
+│   └── useFetch.ts       # Utility for standard REST fetching
+└── index.tsx            # Apollo Client and Provider configuration
 
-### `npm start`
+```
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## 🚀 Features
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+- **Strapi 5 Document Service:** Uses `documentId` for stable, SEO-friendly routing.
+- **Apollo Client Integration:** Efficient data fetching with built-in caching.
+- **Type-Safe Schema:** Full TypeScript support for Strapi's "Blocks" (JSON) content.
+- **GraphQL API:** Requests only the fields required, reducing payload size.
 
-### `npm test`
+---
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## 🛠️ Tech Stack
 
-### `npm run build`
+- **Frontend:** React, TypeScript, React Router 6
+- **API Client:** Apollo Client (GraphQL)
+- **Backend:** [Strapi 5](https://strapi.io/)
+- **Content:** Strapi Blocks (Rich Text)
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+---
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## 📦 Getting Started
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### 1. Backend Setup (Strapi)
 
-### `npm run eject`
+1. Ensure you have the GraphQL plugin installed in your Strapi directory:
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+```bash
+npm install @strapi/plugin-graphql
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+```
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+2. Run the develop server:
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+```bash
+npm run develop
 
-## Learn More
+```
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+3. **Permissions:** In the Strapi Admin, go to `Settings > Roles > Public`. Enable **find** and **findOne** for the **Review** collection.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+### 2. Frontend Setup (React)
 
-### Code Splitting
+1. Install dependencies:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+```bash
+npm install
 
-### Analyzing the Bundle Size
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+2. Start the development server:
 
-### Making a Progressive Web App
+```bash
+npm start
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+```
 
-### Advanced Configuration
+---
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+## 📑 GraphQL Schema Summary
 
-### Deployment
+The project interacts with the following `Review` schema:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+| Field        | Type    | Description                             |
+| ------------ | ------- | --------------------------------------- |
+| `documentId` | ID!     | The unique identifier for the document. |
+| `title`      | String! | Review title.                           |
+| `rating`     | Int!    | Numeric score.                          |
+| `body`       | JSON!   | Strapi Blocks rich text data.           |
 
-### `npm run build` fails to minify
+---
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+## 📡 Example Query
+
+Data is fetched using the following query structure in `src/graphql/queries.ts`:
+
+```graphql
+query GetReviews {
+  reviews {
+    documentId
+    title
+    rating
+    body
+  }
+}
+```
+
+---
+
+## 🔧 Scripts
+
+- `npm start`: Runs the app in development mode.
+- `npm run build`: Optimizes the app for production.
+- `npm test`: Launches the test runner.
+
+## 📄 License
+
+Distributed under the MIT License.
+
+---
+
+**Project Link:** [https://github.com/goldipl/react-strapi-graphql-site](https://github.com/goldipl/react-strapi-graphql-site)
+
+Would you like me to add a **Troubleshooting** section to the README to cover the common fixes we found for Apollo Client imports and TypeScript config?
