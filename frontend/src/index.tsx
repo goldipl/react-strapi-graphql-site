@@ -2,20 +2,26 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import "./index.css";
 import App from "./App";
-import reportWebVitals from "./reportWebVitals";
 
-// We use 'as HTMLElement' to tell TypeScript that we are sure the root element exists.
+import { ApolloClient, InMemoryCache } from "@apollo/client";
+import { ApolloProvider } from "@apollo/client/react";
+
+import { HttpLink } from "@apollo/client";
+
+const client = new ApolloClient({
+  link: new HttpLink({
+    uri: "http://localhost:1337/graphql",
+  }),
+  cache: new InMemoryCache(),
+});
+
 const rootElement = document.getElementById("root") as HTMLElement;
-
 const root = ReactDOM.createRoot(rootElement);
 
 root.render(
   <React.StrictMode>
-    <App />
+    <ApolloProvider client={client}>
+      <App />
+    </ApolloProvider>
   </React.StrictMode>,
 );
-
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
