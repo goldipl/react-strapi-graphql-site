@@ -113,7 +113,8 @@ query GetReviews {
 
 ## 🖼️ Screenshots
 
-![screenshot](./screenshots/screenshot.png)
+![screenshot](./screenshots/screenshot01.png)
+![screenshot](./screenshots/screenshot02.png)
 
 ## 📄 License
 
