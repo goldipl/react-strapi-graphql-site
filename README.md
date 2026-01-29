@@ -5,18 +5,65 @@ A modern, type-safe review site built with **React** and **TypeScript**. This pr
 ## 📂 Project Structure
 
 ```text
-src/
-├── graphql/
-│   └── queries.ts       # Centralized GraphQL query definitions
-├── types/
-│   └── review.ts        # TypeScript interfaces for Review data
-├── pages/
-│   ├── Homepage.tsx      # Review listing with content snippets
-│   └── ReviewDetails.tsx # Full review view by documentId
-├── hooks/
-│   └── useFetch.ts       # Utility for standard REST fetching
-└── index.tsx            # Apollo Client and Provider configuration
-
+react-strapi-graphql-site/
+├── backend/                    # Strapi 5 headless CMS
+│   ├── config/
+│   │   ├── admin.ts           # Admin panel configuration
+│   │   ├── api.ts             # API configuration
+│   │   ├── database.ts        # Database connection settings
+│   │   ├── middlewares.ts      # Middleware configuration
+│   │   ├── plugins.ts         # Plugin configuration
+│   │   └── server.ts          # Server configuration
+│   ├── src/
+│   │   ├── api/
+│   │   │   └── review/        # Review content type
+│   │   │       ├── content-types/
+│   │   │       │   └── review/schema.json
+│   │   │       ├── controllers/review.ts
+│   │   │       ├── routes/review.ts
+│   │   │       └── services/review.ts
+│   │   ├── admin/             # Admin panel customization
+│   │   ├── extensions/        # Strapi extensions
+│   │   └── index.ts           # Entry point
+│   ├── types/
+│   │   └── generated/         # Auto-generated TypeScript types
+│   ├── public/
+│   │   ├── robots.txt
+│   │   └── uploads/           # Media uploads
+│   ├── database/
+│   │   └── migrations/        # Database migrations
+│   ├── package.json
+│   ├── tsconfig.json
+│   └── .env                   # Environment variables
+│
+├── frontend/                   # React + TypeScript frontend
+│   ├── public/
+│   │   ├── index.html
+│   │   ├── manifest.json
+│   │   └── robots.txt
+│   ├── src/
+│   │   ├── graphql/
+│   │   │   └── queries.ts     # Centralized GraphQL query definitions
+│   │   ├── types/
+│   │   │   └── review.ts      # TypeScript interfaces for Review data
+│   │   ├── pages/
+│   │   │   ├── Homepage.tsx   # Review listing with content snippets
+│   │   │   └── ReviewDetails.tsx # Full review view by documentId
+│   │   ├── components/
+│   │   │   └── SiteHeader.tsx # Reusable header component
+│   │   ├── hooks/
+│   │   │   └── useFetch.ts    # Utility for standard REST fetching
+│   │   ├── App.tsx            # Root component
+│   │   ├── index.tsx          # Apollo Client and Provider configuration
+│   │   ├── index.css          # Global styles
+│   │   └── setupTests.ts      # Test configuration
+│   ├── package.json
+│   ├── tsconfig.json
+│   ├── tailwind.config.js     # Tailwind CSS configuration
+│   ├── postcss.config.js      # PostCSS configuration
+│   └── .env                   # Environment variables
+│
+└── README.md
 ```
 
 ## 🚀 Features
