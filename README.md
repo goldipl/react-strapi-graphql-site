@@ -30,7 +30,7 @@ src/
 
 ## 🛠️ Tech Stack
 
-- **Frontend:** React, TypeScript, React Router 6
+- **Frontend:** React, TypeScript, React Router 6, Tailwind CSS
 - **API Client:** Apollo Client (GraphQL)
 - **Backend:** [Strapi 5](https://strapi.io/)
 - **Content:** Strapi Blocks (Rich Text)
@@ -110,6 +110,10 @@ query GetReviews {
 - `npm start`: Runs the app in development mode.
 - `npm run build`: Optimizes the app for production.
 - `npm test`: Launches the test runner.
+
+## 🖼️ Screenshots
+
+![screenshot](./screenshots/screenshot.png)
 
 ## 📄 License
 
