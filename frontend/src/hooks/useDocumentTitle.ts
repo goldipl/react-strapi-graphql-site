@@ -1,0 +1,12 @@
+import { useEffect } from "react";
+import { SITE_NAME, SITE_TAGLINE } from "../config";
+
+const useDocumentTitle = (title?: string) => {
+  useEffect(() => {
+    document.title = title
+      ? `${title} · ${SITE_NAME}`
+      : `${SITE_NAME} — ${SITE_TAGLINE}`;
+  }, [title]);
+};
+
+export default useDocumentTitle;

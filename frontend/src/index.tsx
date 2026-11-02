@@ -3,16 +3,22 @@ import ReactDOM from "react-dom/client";
 import "./index.css";
 import App from "./App";
 
-import { ApolloClient, InMemoryCache } from "@apollo/client";
+import { ApolloClient, HttpLink, InMemoryCache } from "@apollo/client";
 import { ApolloProvider } from "@apollo/client/react";
-
-import { HttpLink } from "@apollo/client";
+import { GRAPHQL_URL } from "./config";
 
 const client = new ApolloClient({
-  link: new HttpLink({
-    uri: "http://localhost:1337/graphql",
+  link: new HttpLink({ uri: GRAPHQL_URL }),
+  cache: new InMemoryCache({
+    typePolicies: {
+      // Strapi 5 identifies documents by `documentId`, not `id`.
+      Review: { keyFields: ["documentId"] },
+      Category: { keyFields: ["documentId"] },
+    },
   }),
-  cache: new InMemoryCache(),
+  defaultOptions: {
+    watchQuery: { fetchPolicy: "cache-and-network" },
+  },
 });
 
 const rootElement = document.getElementById("root") as HTMLElement;

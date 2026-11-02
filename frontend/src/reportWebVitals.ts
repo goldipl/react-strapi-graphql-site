@@ -1,6 +1,6 @@
-// Remove TypeScript type annotation from JS file
+import { ReportHandler } from "web-vitals";
 
-const reportWebVitals = (onPerfEntry) => {
+const reportWebVitals = (onPerfEntry?: ReportHandler) => {
   if (onPerfEntry && typeof onPerfEntry === "function") {
     import("web-vitals").then(({ getCLS, getFID, getFCP, getLCP, getTTFB }) => {
       getCLS(onPerfEntry);
